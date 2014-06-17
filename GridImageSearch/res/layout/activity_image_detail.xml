@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${packageName}.${activityClass}" >
+
+    <ImageView
+        android:id="@+id/ivProfile2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:contentDescription="@string/wallpapper"
+        android:scaleType="centerCrop"
+        android:src="@drawable/backwall" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:background="#7F000000" >
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_height="32dp"
+            android:layout_width="32dp"
+            android:background="#00000000"
+            android:src="@drawable/close_icon"
+            android:contentDescription="@string/close"
+            android:onClick="onCloseImage" />
+
+        <com.loopj.android.image.SmartImageView
+            android:id="@+id/ivFullImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/imageButton1"
+            android:src="@drawable/empty_image" />
+
+    </RelativeLayout>
+    
+</RelativeLayout>
+

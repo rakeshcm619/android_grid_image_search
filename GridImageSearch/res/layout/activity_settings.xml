@@ -1,0 +1,154 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${packageName}.${activityClass}" >
+
+    <ImageView
+        android:id="@+id/ivProfile2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:contentDescription="@string/wallpapper"
+        android:scaleType="centerCrop"
+        android:src="@drawable/backwall" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:paddingBottom="15dp"
+        android:background="#7F000000" >
+
+        <TextView
+            android:id="@+id/tvSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="@string/settings_size"
+            android:textColor="#DDDDDD" 
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+        <TextView
+	        android:id="@+id/tvColor"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/tvSize"
+	        android:layout_below="@+id/tvSize"
+	        android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+	        android:text="@string/settings_color"
+	        android:textColor="#DDDDDD" 
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/tvType"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/tvColor"
+	        android:layout_below="@+id/tvColor"
+	        android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+	        android:text="@string/settings_type"
+	        android:textColor="#DDDDDD" 
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <TextView
+	        android:id="@+id/tvSite"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/tvType"
+	        android:layout_below="@+id/tvType"
+	        android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+	        android:text="@string/settings_site"
+	        android:textColor="#DDDDDD" 
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	    <Spinner
+	        android:id="@+id/spSize"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/tvSize"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginLeft="20dp"
+	        android:layout_toRightOf="@+id/tvType"
+	        android:textAlignment="gravity"
+	        android:gravity="right"
+	        android:textColor="#DDDDDD"  />
+
+	    <Spinner
+	        android:id="@+id/spColor"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/tvColor"
+	        android:layout_alignLeft="@+id/spSize"
+	        android:layout_below="@+id/tvSize"
+	        android:textAlignment="gravity"
+	        android:gravity="right"
+	        android:textColor="#DDDDDD"   />
+
+	    <Spinner
+	        android:id="@+id/spType"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/tvType"
+	        android:layout_alignLeft="@+id/spColor"
+	        android:layout_below="@+id/tvColor"
+	        android:textAlignment="gravity"
+	        android:gravity="right"
+	        android:textColor="#DDDDDD"   />
+
+	    <EditText
+	        android:id="@+id/etSite"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/tvSite"
+	        android:layout_alignBottom="@+id/tvSite"
+	        android:layout_alignLeft="@+id/spType"
+	        android:ems="10"
+	        android:hint="@string/site_hint"
+	        android:textColor="#DDDDDD"  >
+
+	        <requestFocus />
+	    </EditText>
+
+	    <Button
+	        android:id="@+id/btnSave"
+	        style="?android:attr/buttonStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/tvSite"
+	        android:layout_below="@+id/tvSite"
+	        android:layout_marginTop="30dp"
+	        android:layout_marginLeft="30dp"
+	        android:text="@string/save"
+	        android:textColor="#DDDDDD"
+	        android:onClick="onSave" />
+
+	    <Button
+	        android:id="@+id/btnCancel"
+	        style="?android:attr/buttonStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignTop="@+id/btnSave"
+	        android:layout_marginRight="30dp"
+	        android:text="@string/cancel"
+	        android:textColor="#DDDDDD"
+	        android:onClick="onCancel" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
