@@ -74,7 +74,8 @@ public class MainActivity extends Activity {
 			public void onScroll(AbsListView view, int firstVisibleItem,
 					int visibleItemCount, int totalItemCount) {
 				// TODO Auto-generated method stub
-				if((firstVisibleItem + visibleItemCount + PAGE_COUNT > totalItemCount) && isFetchComplete) {
+				if((firstVisibleItem + visibleItemCount + PAGE_COUNT > totalItemCount) 
+						&& isFetchComplete && !(etSearchBar.getText().toString().equalsIgnoreCase(""))) {
 					apiSearchImages(true, firstVisibleItem+1);
 				}
 			}
@@ -105,7 +106,7 @@ public class MainActivity extends Activity {
 			Toast.makeText(this, "Searching for " + query, Toast.LENGTH_SHORT).show();
 		}
 		else {
-			Toast.makeText(getBaseContext(), "Fetching next " + PAGE_COUNT + " results", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getBaseContext(), "Fetching next " + PAGE_COUNT + " results", Toast.LENGTH_SHORT).show();
 		}
 		
 		AsyncHttpClient client = new AsyncHttpClient();
