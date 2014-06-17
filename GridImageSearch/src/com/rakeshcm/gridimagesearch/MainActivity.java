@@ -13,12 +13,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -34,6 +35,8 @@ public class MainActivity extends Activity {
 	private String settingsType = "";
 	private String settingsColor = "";
 	private String settingsSite = "";
+	
+	private boolean isFetchComplete = false;
 	
 	ArrayList<ImageResult> imageResults = new ArrayList<ImageResult>();
 	ImageArrayAdapter imageAdapter;
@@ -58,6 +61,24 @@ public class MainActivity extends Activity {
 				startActivity(i);
 			}
 		});
+		
+		gvGridImages.setOnScrollListener(new OnScrollListener() {
+			
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+				// TODO Auto-generated method stub
+				if((firstVisibleItem + visibleItemCount + PAGE_COUNT > totalItemCount) && isFetchComplete) {
+					apiSearchImages(true, firstVisibleItem+1);
+				}
+			}
+		});
 	}
 	
 	
@@ -74,14 +95,24 @@ public class MainActivity extends Activity {
     }
 	
 	public void onImageSearch(View v) {
+		apiSearchImages(false, 0);
+	}
+	
+	
+	private void apiSearchImages(final boolean isCalledDueTOScroll, int start) {
 		String query = etSearchBar.getText().toString();
-		Toast.makeText(this, "Searching for " + query, Toast.LENGTH_SHORT).show();
-		Log.d("DEBUG", query);
+		if(!isCalledDueTOScroll) {
+			Toast.makeText(this, "Searching for " + query, Toast.LENGTH_SHORT).show();
+		}
+		else {
+			Toast.makeText(getBaseContext(), "Fetching next " + PAGE_COUNT + " results", Toast.LENGTH_SHORT).show();
+		}
 		
 		AsyncHttpClient client = new AsyncHttpClient();
+		isFetchComplete = false;
 		client.get("https://ajax.googleapis.com/ajax/services/search/images?"
 				+ "rsz=" + PAGE_COUNT 
-				+ "&start=" + 0 
+				+ "&start=" + start 
 				+ "&imgcolor=" + settingsColor 
 				+ "&imgtype=" + settingsType
 				+ "&imgsz=" + settingsSize
@@ -97,10 +128,13 @@ public class MainActivity extends Activity {
 						try {
 							imageJsonResults = response.getJSONObject(
 									"responseData").getJSONArray("results");
-							imageResults.clear();
+							if(!isCalledDueTOScroll) {
+								imageResults.clear();
+							}
 							imageResults.addAll(ImageResult.fromJSONArray(imageJsonResults));
 							imageAdapter.notifyDataSetChanged();
-							Log.d("DEBUG", imageResults.toString());
+							isFetchComplete = true;
+							//Log.d("DEBUG", imageResults.toString());
 						}
 						catch (JSONException ex) {
 							ex.printStackTrace();
